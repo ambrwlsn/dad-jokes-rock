@@ -13,8 +13,19 @@
 
     <p class="joke-container"></p>
 
-
     <button class="joke-button"></button>
+
+    <p class="input-container">
+        <form role="search">
+            <div>
+                <input type="search" class="joke-search" name="term" size="30" minlength="2" maxlength="20" pattern="[A-Za-z_ ]{1,25}" title="Only letters allowed"
+                    placeholder="Search jokes..." aria-label="Search for a joke containing a certain term" spellcheck="true">
+                <button class="search-button">Search</button>
+            </div>
+        </form>
+    </p>
+
+    <p class="joke-list"></p>
 
     <!-- <p><a href="https://www.pexels.com">Photos provided by Pexels</a></p> -->
     <!-- <p>This <a href="https://www.pexels.com/photo/food-dinner-lunch-meal-4147875">Photo</a> was taken by <a href="https://www.pexels.com/@daria">Daria</a> on Pexels.</p> -->
