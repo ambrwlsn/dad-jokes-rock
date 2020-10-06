@@ -5,18 +5,15 @@
   "main": "data.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "clean": "rm -rf .cache/ dist/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ambrwlsn/dad-jokes.git"
   },
-  "keywords": [
-    "jokes",
-    "fun",
-    "interactive"
-  ],
+  "keywords": ["jokes", "fun", "interactive"],
   "author": "ambrwlsn",
   "license": "ISC",
   "bugs": {
@@ -27,7 +24,8 @@
     "@babel/polyfill": "^7.11.5",
     "@babel/runtime-corejs3": "^7.11.2",
     "core-js": "^3.6.5",
-    "dompurify": "^2.1.1"
+    "dompurify": "^2.1.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

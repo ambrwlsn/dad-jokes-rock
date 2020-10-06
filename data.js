@@ -1,10 +1,15 @@
 import DOMPurify from 'dompurify';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import { getRandomInt } from './helpers.js';
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const term = urlParams.get('term');
+const APIKey =
+  process.env.NODE_ENV === 'production'
+    ? process.env.API_KEY
+    : process.env.API_KEY;
 
 async function getDadJoke() {
   let response = await fetch('https://icanhazdadjoke.com/', {
@@ -23,7 +28,21 @@ async function searchDadJokes() {
     }
   });
   let data = await response.json();
-  console.log(data);
+  return data;
+}
+
+async function searchPicture() {
+  let response = await fetch(`https://api.pexels.com/v1/search?query=${term}`, {
+    headers: {
+      Authorization: APIKey
+    }
+  });
+  let data = await response.json();
+
+  if (!data) {
+    return;
+  }
+
   return data;
 }
 
@@ -54,8 +73,14 @@ const insertSearchedJokes = data => {
   const jokes = data.results;
 
   if (term && jokes.length === 0) {
-    const noJokeMarkup = `<div>No jokes found! Try a different search term.</div>`
+    const noJokeMarkup = `<div>No jokes found! Try a different search term.</div>`;
     jokeContainer[0].insertAdjacentHTML('afterbegin', noJokeMarkup);
+  }
+  if (!term) {
+    const noTermEntered = `<div>No search term entered! Please try a word.</div>`;
+    jokeContainer[0].insertAdjacentHTML('afterbegin', noTermEntered);
+
+    return null;
   }
 
   const listItems = jokes
@@ -69,6 +94,18 @@ const insertSearchedJokes = data => {
   jokeContainer[0].insertAdjacentHTML('afterbegin', jokeMarkup);
 };
 
+const insertSearchedJokeImage = data => {
+  const jokeImage = document.getElementsByClassName('joke-image')[0];
+  const tinyImage = data.src.tiny;
+
+  if (!term || (term && !tinyImage)) {
+    return null;
+  }
+
+  jokeImage.src = tinyImage;
+  jokeImage.alt = `A photo with a ${term} in it.`;
+};
+
 jokeButton[0].addEventListener('click', () =>
   getDadJoke().then(data => {
     insertJoke(data);
@@ -77,13 +114,21 @@ jokeButton[0].addEventListener('click', () =>
 
 const jokeSearchButton = document
   .getElementsByClassName('search-button')[0]
-  .addEventListener('submit', (event) => {
+  .addEventListener('submit', event => {
     event.preventDefault();
   });
 
-
-searchDadJokes().then(data => {
-  insertSearchedJokes(data);
-})
+searchDadJokes()
+  .then(data => {
+    insertSearchedJokes(data);
+  })
+  .then(
+    searchPicture().then(data => {
+      insertSearchedJokeImage(
+        data.photos[getRandomInt(Math.min(15, data.total_results))]
+      );
+    })
+  );
 
 // once the button has been pressed, disable it for 12 hours
+// only return searched jokes that contain the whole term (e.g. from "hat: ""hat", not "that")
