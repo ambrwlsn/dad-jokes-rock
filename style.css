@@ -1,25 +1,141 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+p {
+  margin: 0;
+  padding: 0;
+}
+
 html {
+  height: 100%;
   font-family: sans-serif;
-  font-size: 20px;
-  padding-left: 20px;
+  font-size: 2rem;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  font-size: 112.5%;
+  font-family: 'Andada', serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+ul {
+  padding-left: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+.content-section {
+  flex-grow: 1;
+  padding: 1.5rem;
+}
+@media (min-width: 600px) {
+  .content-section {
+    padding: 2rem;
+  }
 }
 
 .joke-container {
-  margin-bottom: 20px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  overflow: scroll;
-  width: max-content;
+  text-align: center;
+}
+
+.input-container {
+  position: relative;
+  text-align: center;
+  background-color: #e2ccdd;
+}
+
+.single-joke:not(:empty) {
+  margin-bottom: 1rem;
 }
 
 .joke-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
   padding: 0;
 }
 
 .joke-button img {
   width: 150px;
+}
+
+.search-form {
+  padding: 0 2rem;
+}
+
+.search-button {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  padding: 4px 9px;
+  background: purple;
+  border: 2px solid purple;
+  border-radius: 6px;
+}
+
+.joke-image-container {
+  width: max-content;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.joke-list {
+  text-align: left;
+}
+
+.empty-message {
+  text-align: center;
+}
+
+input[type='search'] {
+  font: inherit;
+  width: 100px;
+  padding: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 4px dotted purple;
+}
+
+.github-link {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  text-align: left;
+  width: 100px;
+  height: 100px;
+  padding: 1rem;
+  background: #d6b4ce;
+  transform-origin: top left;
+  transform: translateX(30px) rotate(-45deg);
+}
+
+.github-link:hover,
+.github-link:focus {
+  background: #c397b9;
+}
+
+.github-link > svg {
+  transform: rotate(45deg);
 }

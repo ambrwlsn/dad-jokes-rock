@@ -52,6 +52,7 @@ const nonPressedButton = require('./img/button-1.png');
 
 var img = document.createElement('img');
 img.src = nonPressedButton;
+img.setAttribute('alt', 'New joke');
 jokeButton[0].appendChild(img);
 
 img.addEventListener('mousedown', () => {
@@ -62,8 +63,14 @@ img.addEventListener('mouseup', () => {
   img.src = nonPressedButton;
 });
 
+const searchField = document.getElementById('joke-search');
+
+if (term) {
+  searchField.value = term;
+}
+
 const insertJoke = data => {
-  const jokeContainer = document.getElementsByClassName('joke-container');
+  const jokeContainer = document.getElementsByClassName('single-joke');
   const joke = (jokeContainer[0].innerHTML = data.joke);
   return DOMPurify.sanitize(joke);
 };
@@ -73,11 +80,11 @@ const insertSearchedJokes = data => {
   const jokes = data.results;
 
   if (term && jokes.length === 0) {
-    const noJokeMarkup = `<div>No jokes found! Try a different search term.</div>`;
+    const noJokeMarkup = `<div class="empty-message">No jokes found! Try a different search term.</div>`;
     jokeContainer[0].insertAdjacentHTML('afterbegin', noJokeMarkup);
   }
   if (!term) {
-    const noTermEntered = `<div>No search term entered! Please try a word.</div>`;
+    const noTermEntered = `<div class="empty-message">No search term entered. Please try a word.</div>`;
     jokeContainer[0].insertAdjacentHTML('afterbegin', noTermEntered);
 
     return null;
@@ -132,3 +139,5 @@ searchDadJokes()
 
 // once the button has been pressed, disable it for 12 hours
 // only return searched jokes that contain the whole term (e.g. from "hat: ""hat", not "that")
+// re-populate the search field with the search term
+// add a clear button when there's a search term
