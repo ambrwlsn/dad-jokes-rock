@@ -117,10 +117,16 @@ input[type='search'] {
   border-bottom: 4px dotted purple;
 }
 
-.github-link {
+.github-link-wrapper {
   position: absolute;
   right: 0;
   top: 0;
+  height: 140px;
+  overflow: hidden;
+  transform: translateY(-50%);
+}
+
+.github-link {
   display: block;
   text-align: left;
   width: 100px;
@@ -128,7 +134,7 @@ input[type='search'] {
   padding: 1rem;
   background: #d6b4ce;
   transform-origin: top left;
-  transform: translateX(30px) rotate(-45deg);
+  transform: translate(30px, 70px) rotate(-45deg);
 }
 
 .github-link:hover,
