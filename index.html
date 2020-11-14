@@ -46,9 +46,9 @@
     </head>
 
     <body>
-        <h1>Dad Jokes Rock <span role='img' aria-label="rock on emoji">🤘</span></h1>
         <section class="content-section joke-container">
             <div>
+                <h1>Dad Jokes Rock <span role='img' aria-label="rock on emoji">🤘</span></h1>
                 <p class="single-joke" role="status" aria-live="polite" aria-relevant="additions text">
                 Click the button below for a random dad joke!
             </p>
@@ -59,7 +59,7 @@
             <form role="search">
                 <div class="search-form">
                     <label for="joke-search">Or search for jokes containing this word:</label>
-                    <input type="search" id="joke-search" class="joke-search" name="term" size="30" minlength="2"
+                    <input required type="search" id="joke-search" oninvalid="this.setCustomValidity('Please use letters only')" oninput="setCustomValidity('')" class="joke-search" name="term" size="35" minlength="2"
                     maxlength="20" pattern="[A-Za-z_ ]{1,25}" spellcheck="true">
                     <button class="search-button">Search</button>
                 </div>

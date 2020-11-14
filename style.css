@@ -43,22 +43,21 @@ img {
 }
 
 h1 {
-  text-align: center;
-  padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .content-section {
-  flex-grow: 1;
-  padding: 0 1.5rem;
+  padding: 1.5rem;
 }
 @media (min-width: 600px) {
   .content-section {
-    padding: 0 2rem;
+    padding: 2rem;
   }
 }
 
 .joke-container {
   display: flex;
+  min-height: 50vh;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -69,6 +68,7 @@ h1 {
   text-align: center;
   background-color: #e2ccdd;
   padding-top: 2rem;
+  flex-grow: 1;
 }
 
 .single-joke:not(:empty) {
@@ -84,6 +84,7 @@ h1 {
 
 .joke-button img {
   width: 150px;
+  height: 58px;
 }
 
 .search-form {
@@ -102,7 +103,6 @@ h1 {
 }
 
 .joke-image-container {
-  width: max-content;
   margin: 0 auto;
   padding: 1rem;
 }

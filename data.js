@@ -14,8 +14,8 @@ const APIKey =
 async function getDadJoke() {
   let response = await fetch('https://icanhazdadjoke.com/', {
     headers: {
-      Accept: 'application/json'
-    }
+      Accept: 'application/json',
+    },
   });
   let data = await response.json();
   return data;
@@ -24,8 +24,8 @@ async function getDadJoke() {
 async function searchDadJokes() {
   let response = await fetch(`https://icanhazdadjoke.com/search?term=${term}`, {
     headers: {
-      Accept: 'application/json'
-    }
+      Accept: 'application/json',
+    },
   });
   let data = await response.json();
   return data;
@@ -34,8 +34,8 @@ async function searchDadJokes() {
 async function searchPicture() {
   let response = await fetch(`https://api.pexels.com/v1/search?query=${term}`, {
     headers: {
-      Authorization: APIKey
-    }
+      Authorization: APIKey,
+    },
   });
   let data = await response.json();
 
@@ -52,33 +52,34 @@ const nonPressedButton = require('./img/button-1.png');
 
 var img = document.createElement('img');
 img.src = nonPressedButton;
-img.width = 150
 img.setAttribute('alt', 'New joke');
 jokeButton[0].appendChild(img);
 
 img.addEventListener('mousedown', () => {
   img.src = pressedButton;
-  img.width = 150
 });
 
 img.addEventListener('mouseup', () => {
   img.src = nonPressedButton;
-  img.width = 150
 });
 
 const searchField = document.getElementById('joke-search');
+const searchButton = document.getElementsByClassName('search-button');
+const resetLink = ` <a href="/">Reset</a>`;
 
 if (term) {
   searchField.value = term;
+
+  searchButton[0].insertAdjacentHTML('afterend', resetLink);
 }
 
-const insertJoke = data => {
+const insertJoke = (data) => {
   const jokeContainer = document.getElementsByClassName('single-joke');
   const joke = (jokeContainer[0].innerHTML = data.joke);
   return DOMPurify.sanitize(joke);
 };
 
-const insertSearchedJokes = data => {
+const insertSearchedJokes = (data) => {
   const jokeContainer = document.getElementsByClassName('joke-list');
   const jokes = data.results;
 
@@ -94,7 +95,7 @@ const insertSearchedJokes = data => {
   }
 
   const listItems = jokes
-    .map(joke => {
+    .map((joke) => {
       return `<li>${joke.joke}</li>`;
     })
     .join('');
@@ -104,7 +105,7 @@ const insertSearchedJokes = data => {
   jokeContainer[0].insertAdjacentHTML('afterbegin', jokeMarkup);
 };
 
-const insertSearchedJokeImage = data => {
+const insertSearchedJokeImage = (data) => {
   const jokeImage = document.getElementsByClassName('joke-image')[0];
   const tinyImage = data.src.tiny;
 
@@ -117,30 +118,19 @@ const insertSearchedJokeImage = data => {
 };
 
 jokeButton[0].addEventListener('click', () =>
-  getDadJoke().then(data => {
+  getDadJoke().then((data) => {
     insertJoke(data);
   })
 );
 
-const jokeSearchButton = document
-  .getElementsByClassName('search-button')[0]
-  .addEventListener('submit', event => {
-    event.preventDefault();
-  });
-
 searchDadJokes()
-  .then(data => {
+  .then((data) => {
     insertSearchedJokes(data);
   })
   .then(
-    searchPicture().then(data => {
+    searchPicture().then((data) => {
       insertSearchedJokeImage(
         data.photos[getRandomInt(Math.min(15, data.total_results))]
       );
     })
   );
-
-// once the button has been pressed, disable it for 12 hours
-// only return searched jokes that contain the whole term (e.g. from "hat: ""hat", not "that")
-// re-populate the search field with the search term
-// add a clear button when there's a search term
