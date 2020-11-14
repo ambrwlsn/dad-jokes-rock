@@ -6,7 +6,8 @@
 
 html,
 body,
-p {
+p,
+h1 {
   margin: 0;
   padding: 0;
 }
@@ -41,13 +42,18 @@ img {
   max-width: 100%;
 }
 
+h1 {
+  text-align: center;
+  padding: 2rem;
+}
+
 .content-section {
   flex-grow: 1;
-  padding: 1.5rem;
+  padding: 0 1.5rem;
 }
 @media (min-width: 600px) {
   .content-section {
-    padding: 2rem;
+    padding: 0 2rem;
   }
 }
 
@@ -62,10 +68,11 @@ img {
   position: relative;
   text-align: center;
   background-color: #e2ccdd;
+  padding-top: 2rem;
 }
 
 .single-joke:not(:empty) {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .joke-button {

@@ -52,15 +52,18 @@ const nonPressedButton = require('./img/button-1.png');
 
 var img = document.createElement('img');
 img.src = nonPressedButton;
+img.width = 150
 img.setAttribute('alt', 'New joke');
 jokeButton[0].appendChild(img);
 
 img.addEventListener('mousedown', () => {
   img.src = pressedButton;
+  img.width = 150
 });
 
 img.addEventListener('mouseup', () => {
   img.src = nonPressedButton;
+  img.width = 150
 });
 
 const searchField = document.getElementById('joke-search');
