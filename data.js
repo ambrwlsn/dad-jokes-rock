@@ -121,9 +121,10 @@ const insertSearchedJokeImage = (data) => {
   }
 
   jokeImageLink.href = data.url;
+  jokeImageLink.setAttribute('aria-label', `A photo with a ${term} in it.`);
   jokeImage.src = tinyImage;
   jokeImage.alt = `A photo with a ${term} in it.`;
-  jokeCaption.innerHTML = `Photo by <a target="_blank" class="joke-author" href="${
+  jokeCaption.innerHTML = `Photo by <a rel="noreferrer" target="_blank" class="joke-author" href="${
     data.photographer_url
   }">${data.photographer}</a>`;
 };

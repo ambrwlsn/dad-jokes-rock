@@ -58,7 +58,7 @@
         <section class="content-section input-container">
             <form role="search">
                 <div class="search-form">
-                    <label for="joke-search">Or search for jokes containing this word:</label>
+                    <label for="joke-search">Search for jokes containing this word:</label>
                     <input required type="search" id="joke-search" oninvalid="this.setCustomValidity('Please use letters only')" oninput="setCustomValidity('')" class="joke-search" name="term" size="35" minlength="2"
                     maxlength="20" pattern="[A-Za-z_ ]{1,25}" spellcheck="true">
                     <button class="search-button">Search</button>
@@ -66,7 +66,7 @@
             </form>
 
             <figure class="joke-image-container">
-                <a target="_blank" class="joke-image-link" href=""><img alt="" class="joke-image"/></a>
+                <a target="_blank" rel="noreferrer" class="joke-image-link" href="" aria-label=""><img alt="" class="joke-image"/></a>
                 <figcaption class="joke-caption"></figcaption>
             </figure>
 
@@ -85,5 +85,6 @@
 
     </body>
     <script type="text/javascript" src="./data.js"></script>
+    <script async defer data-domain="dad-jokes-rock.netlify.app" src="https://plausible.io/js/plausible.js"></script>
 
 </html>
