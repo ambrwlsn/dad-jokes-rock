@@ -28,6 +28,11 @@ async function searchDadJokes() {
     },
   });
   let data = await response.json();
+
+  if (!data) {
+    return;
+  }
+
   return data;
 }
 
@@ -106,15 +111,21 @@ const insertSearchedJokes = (data) => {
 };
 
 const insertSearchedJokeImage = (data) => {
+  const jokeImageLink = document.getElementsByClassName('joke-image-link')[0];
   const jokeImage = document.getElementsByClassName('joke-image')[0];
-  const tinyImage = data.src.tiny;
+  const jokeCaption = document.getElementsByClassName('joke-caption')[0];
+  const tinyImage = data ? data.src.tiny : null;
 
   if (!term || (term && !tinyImage)) {
     return null;
   }
 
+  jokeImageLink.href = data.url;
   jokeImage.src = tinyImage;
   jokeImage.alt = `A photo with a ${term} in it.`;
+  jokeCaption.innerHTML = `Photo by <a target="_blank" class="joke-author" href="${
+    data.photographer_url
+  }">${data.photographer}</a>`;
 };
 
 jokeButton[0].addEventListener('click', () =>

@@ -105,6 +105,14 @@ h1 {
 .joke-image-container {
   margin: 0 auto;
   padding: 1rem;
+  width: fit-content;
+}
+
+.joke-caption {
+  font-size: 0.8rem;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  font-weight: bold;
 }
 
 .joke-list {
